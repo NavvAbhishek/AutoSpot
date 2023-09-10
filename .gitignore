@@ -26,4 +26,4 @@ client/.env
 # Server directories and files
 api/node_modules
 api/build
-api/.env
+.env
