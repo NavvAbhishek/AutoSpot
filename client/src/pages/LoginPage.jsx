@@ -21,7 +21,7 @@ export default function LoginPage() {
   }
 
   if (redirect) {
-    return <Navigate to={"/"} />;
+    return <Navigate to={"/explore/account"} />;
   }
 
   return (
@@ -41,10 +41,10 @@ export default function LoginPage() {
             value={password}
             onChange={(ev) => setPassword(ev.target.value)}
           />
-          <button className="main-color">Login</button>
+          <button className="primary">Login</button>
           <div className="text-center py-2 text-gray-500">
             Don't have an account yet?{" "}
-            <Link to={"/register"} className="underline text-black">
+            <Link to={"/explore/register"} className="underline text-black">
               Register now
             </Link>
           </div>

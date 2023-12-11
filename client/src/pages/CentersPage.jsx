@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import AccountNav from "../AccountNav";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import CenterImg from "../components/rest/CenterImg";
 
 const CentersPage = () => {
-  const [places, setPlaces] = useState([]);
+  const [centers, setCenters] = useState([]);
   useEffect(() => {
-    axios.get("/places").then(({ data }) => {
-      setPlaces(data);
+    axios.get("/user-centers").then(({ data }) => {
+      setCenters(data);
     });
   }, []);
   return (
@@ -17,7 +18,7 @@ const CentersPage = () => {
       <div className="text-center">
         <Link
           className="inline-flex gap-1 bg-main-color text-white py-2 px-6 rounded-full "
-          to={"/account/centers/new"}
+          to={"/explore/account/centers/new"}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -37,23 +38,21 @@ const CentersPage = () => {
         </Link>
       </div>
       <div className="mt-4">
-        {places.length > 0 &&
-          places.map((place) => (
-            <Link to={'/account/centers/'+place._id} className="flex cursor-pointer gap-4 bg-main-color-light p-4 rounded-2xl mt-4">
-              <div className="flex w-42 h-32 bg-main-color-lightDark grow shrink-0">
-                {place.photos.length > 0 && (
-                  <img className="object-cover" src={'http://localhost:4000/uploads/'+place.photos[0]} alt="" />
-                )}
+        {centers.length > 0 &&
+          centers.map((center) => (
+            <Link to={'/explore/account/centers/'+center._id} className="flex cursor-pointer gap-4 bg-main-color-light p-4 rounded-2xl mt-4">
+              <div className="flex w-42 h-32 grow shrink-0 overflow-hidden">
+               <CenterImg center={center}/>
               </div>
               <div className="grow-0 shrink">
-                <h2 className="text-xl font-semibold"> {place.name}</h2>
-                <p className="text-sm mt-2">{place.description}</p>
+                <h2 className="text-xl font-semibold"> {center.name}</h2>
+                <p className="text-sm mt-2">{center.description}</p>
               </div>
             </Link>
           ))}
       </div>
     </div>
   );
-};
+}; 
 
 export default CentersPage;

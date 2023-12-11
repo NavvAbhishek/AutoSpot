@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const User = require("./models/User");
 const Center = require("./models/Center");
+const Booking = require("./models/Booking")
+
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
@@ -116,9 +118,18 @@ app.post("/upload", photosMiddleware.array("photos", 100), (req, res) => {
   res.json(uploadedFiles);
 });
 
-app.post("/centers", (req, res) => {
+app.post("/centers/", (req, res) => {
   const { token } = req.cookies;
-  const { name, address, addedPhotos, description, extraInfo } = req.body;
+  const {
+    name,
+    address,
+    addedPhotos,
+    description,
+    extraInfo,
+    openTime,
+    closeTime,
+    price,
+  } = req.body;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
     const centerDoc = await Center.create({
@@ -128,12 +139,15 @@ app.post("/centers", (req, res) => {
       photos: addedPhotos,
       description,
       extraInfo,
+      openTime,
+      closeTime,
+      price,
     });
     res.json(centerDoc);
   });
 });
 
-app.get("/places", (req, res) => {
+app.get("/user-centers", (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     const { id } = userData;
@@ -148,10 +162,20 @@ app.get("/centers/:id", async (req, res) => {
 
 app.put("/centers/", async (req, res) => {
   const { token } = req.cookies;
-  const { id, name, address, addedPhotos, description, extraInfo } = req.body;
+  const {
+    id,
+    name,
+    address,
+    addedPhotos,
+    description,
+    extraInfo,
+    openTime,
+    closeTime,
+    price,
+  } = req.body;
 
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
-    if(err) throw err;
+    if (err) throw err;
     const centerDoc = await Center.findById(id);
     if (userData.id === centerDoc.owner.toString()) {
       centerDoc.set({
@@ -160,11 +184,48 @@ app.put("/centers/", async (req, res) => {
         photos: addedPhotos,
         description,
         extraInfo,
+        openTime,
+        closeTime,
+        price,
       });
       await centerDoc.save();
-      res.json('ok')
+      res.json("ok");
     }
   });
+});
+
+app.get("/centers", async (req, res) => {
+  // mongoose.connect(process.env.MONGO_URL);
+  res.json(await Center.find());
+});
+
+app.post('/bookings', async (req, res) => {
+  const userData = await getUserDataFromReq(req);
+  const {
+    center,date, time,name,phone,price,
+  } = req.body;
+  Booking.create({
+    center,date, time,name,phone,price,
+    user:userData.id,
+  }).then((doc) => {
+    res.json(doc);
+  }).catch((err) => {
+    throw err;
+  });
+});
+
+function getUserDataFromReq(req) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
+      if (err) throw err;
+      resolve(userData);
+    });
+  });
+}
+
+app.get('/bookings', async (req,res) => {
+  const userData = await getUserDataFromReq(req);
+  res.json( await Booking.find({user:userData.id}).populate('center') );
 });
 
 app.listen(4000);

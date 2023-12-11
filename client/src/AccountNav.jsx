@@ -21,7 +21,7 @@ const AccountNav = () => {
   return (
     <div>
       <nav className="w-full flex justify-center mt-8 gap-2">
-        <Link className={linkClasses("profile")} to={"/account"}>
+        <Link className={linkClasses("profile")} to={"/explore/account"}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -38,7 +38,7 @@ const AccountNav = () => {
           </svg>
           My Profile
         </Link>
-        <Link className={linkClasses("bookings")} to={"/account/bookings"}>
+        <Link className={linkClasses("bookings")} to={"/explore/account/bookings"}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -55,7 +55,7 @@ const AccountNav = () => {
           </svg>
           My Bookings
         </Link>
-        <Link className={linkClasses("centers")} to={"/account/centers"}>
+        <Link className={linkClasses("centers")} to={"/explore/account/centers"}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

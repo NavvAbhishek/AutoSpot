@@ -7,6 +7,9 @@ const CenterSchema = new mongoose.Schema({
   photos: [String],
   description: String,
   extraInfo: String,
+  openTime: String,
+  closeTime: String,
+  price: Number,
 });
 
 const CenterModel = mongoose.model("Center", CenterSchema);

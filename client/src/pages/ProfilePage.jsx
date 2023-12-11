@@ -16,7 +16,7 @@ export default function AccountPage() {
 
   async function logout() {
     await axios.post("/logout");
-    setRedirect("/");
+    setRedirect("/"); // "/"
     setUser(null);
   }
 
@@ -25,7 +25,7 @@ export default function AccountPage() {
   }
 
   if (ready && !user && !redirect) {
-    return <Navigate to={"/login"} />;
+    return <Navigate to={"/explore/login"} />; // "/login"
   }
 
   // <Route path="/account/bookings" element={<AccountPage />} />
