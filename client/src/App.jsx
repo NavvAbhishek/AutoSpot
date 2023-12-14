@@ -25,7 +25,7 @@ import CenterPage from "./pages/CenterPage";
 
 //import ServicesPage from "./pages/ServicesPage";
 
-axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.baseURL = "https://auto-spot-api.vercel.app";
 axios.defaults.withCredentials = true;
 
 export default function App() {
