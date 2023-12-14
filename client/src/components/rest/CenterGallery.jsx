@@ -19,7 +19,7 @@ export default function CenterGallery({center}) {
           </div>
           {center?.photos?.length > 0 && center.photos.map(photo => (
             <div>
-                <img src={"http://localhost:4000/uploads/"+photo} alt=""/>
+                <img src={"https://auto-spot-api.vercel.app/uploads/"+photo} alt=""/>
             </div>
           ))}
         </div>
@@ -33,17 +33,17 @@ export default function CenterGallery({center}) {
         <div>
           {center.photos?.[0] && (
             <div>
-              <img src={"http://localhost:4000/uploads/"+center.photos[0]} onClick={() => setShowAllPhotos(true)} className="aspect-square cursor-pointer object-cover" alt=""/>
+              <img src={"https://auto-spot-api.vercel.app/uploads/"+center.photos[0]} onClick={() => setShowAllPhotos(true)} className="aspect-square cursor-pointer object-cover" alt=""/>
             </div>
           )}
         </div>
         <div className="grid gap-2">
           {center.photos?.[1] && (
-            <img src={"http://localhost:4000/uploads/"+center.photos[1]} onClick={() => setShowAllPhotos(true)} className="aspect-square cursor-pointer object-cover"  alt=""/>
+            <img src={"https://auto-spot-api.vercel.app/uploads/"+center.photos[1]} onClick={() => setShowAllPhotos(true)} className="aspect-square cursor-pointer object-cover"  alt=""/>
           )}
           <div className="overflow-hidden">
             {center.photos?.[2] && (
-              <img src={"http://localhost:4000/uploads/"+center.photos[2]} onClick={() => setShowAllPhotos(true)} className="aspect-square cursor-pointer object-cover relative top-2"  alt=""/>
+              <img src={"https://auto-spot-api.vercel.app/uploads/"+center.photos[2]} onClick={() => setShowAllPhotos(true)} className="aspect-square cursor-pointer object-cover relative top-2"  alt=""/>
             )}
           </div>
         </div>

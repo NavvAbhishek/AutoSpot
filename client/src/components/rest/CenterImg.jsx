@@ -10,7 +10,7 @@ const CenterImg = ({ center, index = 0, className = null }) => {
   return (
     <img
       className={className}
-      src={"http://localhost:4000/uploads/"+center.photos[index]}
+      src={"https://auto-spot-api.vercel.app/uploads/"+center.photos[index]}
       alt=""
     />
   );

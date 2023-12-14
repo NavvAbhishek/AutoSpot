@@ -15,7 +15,7 @@ export default function IndexPage() {
         <Link to={'/explore/account/center/'+center._id}>
           <div className="bg-gray-500 mb-2 rounded-2xl flex">
             {center.photos?.[0] && (
-              <img src={'http://localhost:4000/uploads/'+center.photos?.[0]} className="rounded-2xl object-cover" alt=""/>
+              <img src={'https://auto-spot-api.vercel.app/uploads/'+center.photos?.[0]} className="rounded-2xl object-cover" alt=""/>
             )}
           </div>
           <h2 className="font-bold">{center.address}</h2>
