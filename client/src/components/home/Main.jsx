@@ -1,5 +1,5 @@
 import React from "react";
-import carImg from "../../assets/maincar.png";
+import carImg from "../../assets/mainCar.png";
 
 export default function Main() {
   return (
